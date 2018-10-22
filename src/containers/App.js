@@ -1,37 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { startUser } from "Redux/actions";
+import { Home } from "Containers";
 
 class App extends Component {
-  componentWillMount() {
-    const { startUser } = this.props;
-    startUser();
-  }
-
   render() {
-    const { userStatus } = this.props;
+    const { children } = this.props;
     return (
       <div>
-        { userStatus }
+        { children || <Home /> }
       </div>
     );
   }
 }
 
-function mapStateToProps ({ user }) {
-  const { userStatus } = user;
-
-  return { userStatus };
-}
-
 App.propTypes = {
-  startUser: PropTypes.func.isRequired,
-  userStatus: PropTypes.string
+  children: PropTypes.node
 };
 
 App.defaultProps = {
-  userStatus: ""
+  children: <div />
 };
 
-export default connect(mapStateToProps, { startUser })(App);
+export default App;

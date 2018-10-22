@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { startUser } from "Redux/actions";
 
 class Home extends Component {
+  componentWillMount() {
+    const { startUser } = this.props;
+    startUser();
+  }
+
   render() {
+    const { userStatus } = this.props;
     return (
       <div>
-        Home
+        { userStatus }
       </div>
     );
   }
 }
 
-Home.propTypes = {
+function mapStateToProps ({ user }) {
+  const { userStatus } = user;
 
+  return { userStatus };
+}
+
+Home.propTypes = {
+  startUser: PropTypes.func.isRequired,
+  userStatus: PropTypes.string
 };
 
-export default Home;
+Home.defaultProps = {
+  userStatus: ""
+};
+
+export default connect(mapStateToProps, { startUser })(Home);
