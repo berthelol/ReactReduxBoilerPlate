@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { startUser } from "Redux/actions";
+import "./Home.scss";
 
 class Home extends Component {
   componentWillMount() {
